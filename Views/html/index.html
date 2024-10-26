@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATM Dashboard</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>ATM Dashboard</h1>
+        <h2>Welcome, <span id="customerName">Customer</span>!</h2>
+
+        <div class="menu">
+            <ul>
+                <li><a href="balance.html">Check Balance</a></li>
+                <li><a href="withdraw.html">Withdraw Money</a></li>
+                <li><a href="deposit.html">Deposit Money</a></li>
+                <li><a href="transfer.html">Transfer Money</a></li>
+                <li><a href="transaction-history.html">Transaction History</a></li>
+                <li><a href="change-password.html">Change Password</a></li>
+            </ul>
+        </div>
+
+        <button id="logoutButton">Logout</button>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Get customer information from local storage (assuming login success stored this)
+            const customerName = localStorage.getItem("customerName");
+
+            // Display customer name if logged in
+            if (customerName) {
+                document.getElementById("customerName").innerText = customerName;
+            } else {
+                // Redirect to login if not logged in
+                window.location.href = "login.html";
+            }
+
+            // Logout functionality
+            document.getElementById("logoutButton").addEventListener("click", function () {
+                // Clear local storage and redirect to login
+                localStorage.removeItem("customerName");
+                localStorage.removeItem("customerId");
+                window.location.href = "login.html";
+            });
+        });
+    </script>
+</body>
+</html>

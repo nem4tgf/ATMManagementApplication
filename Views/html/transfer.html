@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ATM Transfer</title>
+</head>
+<body>
+    <h2>Transfer Money</h2>
+    <form id="transferForm">
+        <label for="senderId">Sender ID:</label>
+        <input type="number" id="senderId" name="senderId" required><br>
+        <label for="receiverId">Receiver ID:</label>
+        <input type="number" id="receiverId" name="receiverId" required><br>
+        <label for="amount">Amount:</label>
+        <input type="number" id="amount" name="amount" required><br>
+        <button type="submit">Transfer</button>
+    </form>
+
+    <script>
+        document.getElementById('transferForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const data = {
+                senderId: document.getElementById('senderId').value,
+                receiverId: document.getElementById('receiverId').value,
+                amount: document.getElementById('amount').value
+            };
+
+            fetch('/api/atm/transfer', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => alert(data.message));
+        });
+    </script>
+</body>
+</html>

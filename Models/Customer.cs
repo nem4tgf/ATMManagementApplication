@@ -6,9 +6,9 @@ namespace ATMManagementApplication.Models{
         [Key]
         public int CustomerId {get; set;}
         [Required]
-        public string Name { get; set; }
+        public required string Name { get; set; }
         [Required]
-        public string Password { get; set; }
+        public required string Password { get; set; }
         
         public decimal Balance { get; set; }
     }

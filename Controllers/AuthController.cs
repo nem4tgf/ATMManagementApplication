@@ -25,6 +25,30 @@ namespace ATMManagementApplication.Controller{
             return Ok(new{message = "Login successful", customerId= customer.CustomerId});
 
         }
+        
+
+        [HttpPost("register")]
+        public IActionResult Register([FromBody] Customer request)
+            {
+        
+        var existingCustomer = _context.Customers.FirstOrDefault(c => c.Name == request.Name);
+        if (existingCustomer != null)
+            return BadRequest("User already exists");
+
+        
+        var newCustomer = new Customer
+        {
+            Name = request.Name,
+            Password = request.Password, 
+            Balance = 0 
+        };
+
+        _context.Customers.Add(newCustomer);
+        _context.SaveChanges();
+
+        return Ok(new { message = "Registration successful", customerId = newCustomer.CustomerId });
+}
+
     }
 }
 
